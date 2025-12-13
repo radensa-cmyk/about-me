@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri Hero Mobile Legends</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: rgb(0, 0, 0);
+      overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      background-color: #FFEE91;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+
+    .text {
+      flex: 1;
+      min-width: 300px;
+      margin-top: 30px;
+      padding: 40px;
+
+    }
+
+    .text p {
+      margin-bottom: 15px;
+    }
+
+    .text a {
+      display: inline-block;
+      margin-top: 8px;
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .text a:hover {
+      text-decoration: underline;
+    }
+
+    .image {
+      flex: 1;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .image img {
+      max-width: 40%;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ✨ Efek aurora bergerak di latar */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.08), transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1), transparent 60%);
+      animation: aurora 6s infinite alternate ease-in-out;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes aurora {
+      0% {
+        background-position: 0% 0%, 100% 100%;
+      }
+
+      100% {
+        background-position: 100% 100%, 0% 0%;
+      }
+    }
+.text p {
+  line-height: 1.8; /* bisa 1.6 – 2.0 */
+}
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2.8em;
+      color: #F5C857;
+      text-shadow: #E2852E, #E2852E, 0 0 100px #E2852E;
+      animation: glowPulse 3s infinite alternate;
+    }
+
+    @keyframes glowPulse {
+      0% {
+        text-shadow: 0 0 10px #117437, 0 0 30px #157957;
+      }
+
+      100% {
+        text-shadow: 0 0 30px #E2852E, 0 0 80px #E2852E;
+      }
+    }
+
+    /* --- Gallery Grid --- */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 25px;
+      padding: 40px;
+      justify-items: center;
+    }
+
+    /* --- Kartu Hero dengan efek hologram --- */
+    .hero {
+      position: relative;
+      width: 200px;
+      height: 300px;
+      overflow: hidden;
+      border-radius: 15px;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.6s, box-shadow 0.3s;
+      background: linear-gradient(145deg, rgba(0, 255, 255, 0.05), rgba(0, 0, 0, 0.3));
+      border: 1px solid rgba(0, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Efek refleksi cahaya hologram */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg,
+          transparent 0%,
+          rgba(0, 255, 255, 0.1) 40%,
+          rgba(255, 255, 255, 0.2) 50%,
+          transparent 60%);
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: 0.6s ease;
+    }
+
+    .hero:hover::before {
+      opacity: 1;
+      transform: translateX(100%);
+    }
+
+    .hero:hover {
+      transform: rotateY(15deg) scale(1.08);
+      box-shadow: 0 0 40px rgba(0, 255, 200, 0.5),
+        0 0 100px rgba(0, 255, 255, 0.2);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background-color: #000;
+      border-radius: 15px;
+      transition: transform 0.5s ease, filter 0.4s;
+    }
+
+    .hero:hover img {
+      transform: scale(1.12);
+      filter: brightness(1.3) contrast(1.2);
+    }
+
+    /* --- Nama Hero dengan efek glow --- */
+    .hero .name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      font-weight: bold;
+      padding: 8px 0;
+      letter-spacing: 1px;
+      color: #00f0ff;
+      text-shadow: 0 0 10px #00f0ff, 0 0 20px #00aaff;
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    /* --- Efek Scan Neon --- */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -150%;
+      left: 0;
+      width: 100%;
+      height: 150%;
+      background: linear-gradient(to bottom, transparent 0%, rgba(0, 255, 255, 0.2) 50%, transparent 100%);
+      opacity: 0;
+      transform: rotate(15deg);
+    }
+
+    .hero:hover::after {
+      opacity: 1;
+      animation: scanDown 1.2s linear;
+    }
+
+    @keyframes scanDown {
+      0% {
+        top: -150%;
+      }
+
+      100% {
+        top: 150%;
+      }
+    }
+
+    /* --- Popup Detail Hero --- */
+    .popup {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0);
+      z-index: 999;
+      opacity: 0;
+      transition: background 0.4s, opacity 0.4s;
+    }
+
+    .popup.active {
+      display: flex;
+      background: rgba(0, 0, 0, 0.85);
+      opacity: 1;
+    }
+
+    .popup-content {
+      background: linear-gradient(180deg, #020617, #00171f);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+      width: 320px;
+      text-align: center;
+      color: white;
+      transform: scale(0.8);
+      opacity: 0;
+      animation: popupZoom 0.5s ease forwards;
+      border: 1px solid rgba(0, 255, 255, 0.2);
+    }
+
+    @keyframes popupZoom {
+      from {
+        transform: scale(0.8) rotateX(10deg);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1) rotateX(0);
+        opacity: 1;
+      }
+    }
+
+    .popup-content img {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 15px;
+      background-color: #000;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.2);
+    }
+
+    .popup-content h2 {
+      margin: 15px 0 5px;
+      color: #00f0ff;
+      text-shadow: 0 0 20px #00f0ff, 0 0 50px #00ffff;
+    }
+
+    .popup-content p {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    .popup-content button {
+      margin-top: 15px;
+      padding: 10px 18px;
+      border: none;
+      background: linear-gradient(90deg, #00f0ff, #00aaff);
+      color: #000;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .popup-content button:hover {
+      background: #fff;
+      transform: scale(1.08);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>About & galery</h1>
+
+  <div class="container">
+    <div class="text">
+      <p>
+        Nama saya Abu Musa Alasyary, seorang pelajar asal Indonesia yang lahir di Bekasi. Saya telah menekuni dunia
+        front-end kreatif selama lebih dari satu tahun, dengan pengalaman belajar di HSI Boarding School serta
+        lingkungan startup.
+        Saya menguasai HTML, CSS, dan Python, serta memiliki ketertarikan besar pada UI/UX Design, dengan fokus pada
+        tampilan yang fungsional dan menarik. Selain itu, saya memiliki hafalan Al-Qur’an sebanyak 25 juz dan sangat
+        menyukai pelajaran Al-Qur’an, yang membentuk kedisiplinan, ketekunan, dan nilai spiritual dalam kehidupan saya.
+
+        Saya juga aktif dalam kegiatan alam terbuka sebagai Ketua Tim Sandvend (Santri Adventure), dan telah melakukan
+        pendakian ke lebih dari 15 gunung. Pengalaman ini melatih kepemimpinan, kerja tim, manajemen risiko, dan
+        ketangguhan mental.
+
+        Saya memiliki hobi mendaki gunung dan mampu berkomunikasi dalam tiga bahasa: Indonesia, Inggris, dan Jawa. Saat
+        ini saya berusia 17 tahun dan terus bersemangat untuk berkembang, baik dalam ilmu agama maupun teknologi.
+      </p>
+
+
+    </div>
+
+    <div class="image">
+      <img src="img 1/gw.png" alt="foto mendaki">
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="hero" data-name="Study Tour"
+      data-desc="study tour to bromo mountain, dilaksanakan ketika ingin perpisahan bersama Global English ketika di pare">
+      <img src="img 1/bromo.jpeg" alt="Alucard">
+      <div class="name">Study Tour</div>
+    </div>
+
+    <div class="hero" data-name="Daurah"
+      data-desc="foto Dauroh akbar di saat bulan ramadhan bersama ponpes yasalam solo, membahas kitab tahajji dan aqidatuna.">
+      <img src="img 1/daurah.jpeg" alt="Gusion">
+      <div class="name">Dauroh</div>
+    </div>
+
+    <div class="hero" data data-name="with tutor GE"
+      data-desc="foto bersama tutor global english ketika di pare, kediri. tempatku belajar bahasa inggris">
+      <img src="img 1/GE.jpeg" alt="Layla">
+      <div class="name">With tutor GE</div>
+    </div>
+
+    <div class="hero" data-name="end 2024"
+      data-desc="foto tadabur alam penutupan 2024 diatas ketinggian 1850 MDPL di gunung kencana.">
+      <img src="img 1/kencana.jpeg" alt="Thamuz">
+      <div class="name">End 2024</div>
+    </div>
+
+    <div class="hero" data-name="Hobi"
+      data-desc="foto terakhir aku tadabur alam, lokasinya di gunung luhur 1750 MDPL yang dimana ini adalah pendakian ke 15 ku">
+      <img src="img 1/luhur.jpeg" alt="Miya">
+      <div class="name">Hobi</div>
+    </div>
+
+    <div class="hero" data-name="AS panitia"
+      data-desc="foto dimana aku ditunjuk untuk menjadi panitia acara pelatihan bersama Yonif 310 kidang kancana">
+      <img src="img 1/panitia.jpeg" alt="Alpha">
+      <div class="name">AS Panitia</div>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <div class="hero" data-name="Kawan seperjuangan"
+      data-desc="orang yang selalu ada dalam suka dan duka, saling menguatkan ketika lelah, dan tetap melangkah bersama meski jalan terasa berat.">
+      <img src="img 1/sekawan.jpeg" alt="Alucard">
+      <div class="name">Kawan seperjuangan</div>
+    </div>
+
+    <div class="hero" data-name="IEF"
+      data-desc="foto dimana kita berangkat dari kota sukabumi to kota jakarta untuk mendatangi seminar international education fair 2025">
+      <img src="img 1/seminar.jpeg" alt="Gusion">
+      <div class="name">Seminar IEF</div>
+    </div>
+
+    <div class="hero" data-name="Moskov"
+      data-desc="foto bersama teman teman seperjuangan yan meraih keahlian dan kesuksesan bersama untuk menggapai masa depan yang cerah.">
+      <img src="img 1/seperjuangan.jpeg" alt="Layla">
+      <div class="name">Seperjuangan</div>
+    </div>
+
+    <div class="hero" data-name="sweeper sandvend"
+      data-desc="foto dimana aku ditunjuk untuk menjadi sweeper tim Sanvend (santri adventure) dalam kegiatan survival di gunung unggaran 2050 MDPL">
+      <img src="img 1/unga.jpeg" alt="Thamuz">
+      <div class="name">sweeper sanvend</div>
+    </div>
+
+    <div class="hero" data-name="Vexana" data-role="Marksman"
+      data-desc="Penguasa kegelapan yang membangkitkan jiwa-jiwa terkutuk. Sekali tersentuh kutukannya, harapan akan lenyap dalam kabut kematian.">
+      <img src="img 1/xx.jpeg" alt="Miya">
+      <div class="name">Vexana</div>
+    </div>
+
+    <div class="hero" data-name="x borg" data-role="Fighter"
+      data-desc="Separuh manusia, separuh mesin—penuh dengan kobaran api pembalasan. Saat armor-nya hancur, amarah sejatinya bangkit membakar segalanya.">
+      <img src="img 1/WhatsApp Image 2025-12-13 at 9.12.29 AM (2).jpeg" alt="Alpha">
+      <div class="name">x borg</div>
+    </div>
+  </div>
+
+
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content" id="popupContent">
+      <img id="popupImg" src="" alt="">
+      <h2 id="popupName"></h2>
+      <p id="popupRole"></p>
+      <p id="popupDesc"></p>
+      <button id="closePopup">Tutup</button>
+    </div>
+  </div>
+
+
+
+  <script>
+    const heroes = document.querySelectorAll('.hero');
+    const popup = document.getElementById('popup');
+    const popupImg = document.getElementById('popupImg');
+    const popupName = document.getElementById('popupName');
+    const popupRole = document.getElementById('popupRole');
+    const popupDesc = document.getElementById('popupDesc');
+    const closePopup = document.getElementById('closePopup');
+
+    heroes.forEach(hero => {
+      hero.addEventListener('click', () => {
+        popupImg.src = hero.querySelector('img').src;
+        popupName.textContent = hero.dataset.name;
+        popupDesc.textContent = hero.dataset.desc;
+        popup.classList.add('active');
+      });
+    });
+
+    function closePopupSmooth() {
+      popup.classList.remove('active');
+    }
+
+    closePopup.addEventListener('click', closePopupSmooth);
+    popup.addEventListener('click', e => {
+      if (e.target === popup) closePopupSmooth();
+    });
+  </script>
+</body>
+
+</html>

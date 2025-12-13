@@ -1,0 +1,129 @@
+/* ======= EFFECT CSS TERKEREN TAMBAHAN ======= */
+
+/* Glow Animations */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent2); }
+  50% { box-shadow: 0 0 25px var(--accent2), 0 0 45px var(--accent); }
+}
+
+/* Tile efek neon + parallax hover */
+.tile {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, rgba(0, 255, 255, 0.04), rgba(255, 120, 40, 0.05));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, var(--accent2), var(--accent));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.tile:hover::before {
+  opacity: 0.25;
+  animation: glowPulse 2s infinite alternate;
+}
+
+.tile img {
+  z-index: 1;
+  position: relative;
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.3, 1);
+  transform-origin: center center;
+}
+
+.tile:hover img {
+  transform: scale(1.15) rotateZ(2deg);
+  filter: brightness(1.2) saturate(1.4);
+}
+
+/* Floating Light Reflection */
+.tile::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1), transparent 40%);
+  opacity: 0;
+  transform: rotate(25deg);
+  transition: opacity 0.6s ease;
+}
+
+.tile:hover::after {
+  opacity: 1;
+  animation: floatLight 3s linear infinite;
+}
+
+@keyframes floatLight {
+  from { transform: translate(-10%, -10%) rotate(25deg); }
+  to { transform: translate(10%, 10%) rotate(25deg); }
+}
+
+/* Modal Glassy + 3D rotation */
+.modal-card.open .card-3d {
+  transform: rotateX(6deg) rotateY(-8deg) scale(1.05);
+  box-shadow: 0 40px 120px rgba(0, 255, 255, 0.2), 0 0 60px rgba(255, 120, 40, 0.3);
+  animation: glowPulse 2.5s infinite alternate;
+}
+
+/* Card Front floating hologram effect */
+.card-front img {
+  filter: drop-shadow(0 0 25px rgba(0, 255, 255, 0.4));
+  transition: all 0.7s cubic-bezier(.25, .8, .25, 1);
+}
+
+.modal-card.open .card-front img {
+  transform: translateY(-12px) scale(1.08) rotateY(3deg);
+  filter: drop-shadow(0 0 35px rgba(255, 120, 40, 0.5))
+          drop-shadow(0 0 50px rgba(0, 255, 255, 0.3));
+}
+
+/* Button Cyber Hover */
+button,
+.accent {
+  position: relative;
+  overflow: hidden;
+}
+
+button::before,
+.accent::before {
+  content: "";
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+button:hover::before,
+.accent:hover::before {
+  left: 125%;
+}
+
+/* Background animated gradient wave */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(0,255,255,0.08), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,120,40,0.08), transparent 40%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: moveBg 10s infinite alternate ease-in-out;
+  z-index: 0;
+}
+
+@keyframes moveBg {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(-40px) scale(1.05); }
+}
